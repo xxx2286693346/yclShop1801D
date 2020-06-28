@@ -7,7 +7,7 @@ import org.apache.dubbo.config.annotation.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.ycl.shop.entity.Category;
-import com.ycl.shop.mapper.CategoryDao;
+import com.ycl.shop.mapper.CategoryMapper;
 import com.ycl.shop.service.CategoryService;
 
 
@@ -20,7 +20,7 @@ import com.ycl.shop.service.CategoryService;
 public class CategoryServiceImpl  implements CategoryService {
 
 	@Autowired
-	private CategoryDao catDao;
+	private CategoryMapper catDao;
 	
 	@Override
 	public int add(Category category) {

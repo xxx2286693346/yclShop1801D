@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bawei.hgshop.dao.SpuDao">
+
+	<resultMap type="spu" id="SpuMap">
+		<id column="id" property="id"></id>
+		<association property="category" column="category_id" select="com.ycl.shop.mapper.CategoryMapper.findById"></association>
+		<association property="brand" column="brand_id" select="com.ycl.shop.mapper.BrandMapper.getByidBrand"></association>
+	</resultMap>
+
+	<!-- int add(Spu spu); -->
+	<insert id="add" useGeneratedKeys="true" keyColumn="id" keyProperty="id">
+		INSERT INTO hg_spu(goods_name,is_marketable,brand_id,caption,category_id,small_pic)
+			VALUES(#{goodsName},#{isMarketable},#{brandId},#{caption},#{categoryId},#{smallPic})
+	</insert>
+	<!-- int update(Spu spu); -->
+	<update id="update">
+		UPDATE hg_spu SET  goods_name=#{goodsName},is_marketable#{isMarketable},brand_id=#{brandId},
+				caption=#{caption},category_id=#{categoryId},small_pic=#{smallPic} 
+		    WHERE id=#{id}
+	</update>
+
+	<!-- int delete(int[] ids); -->
+	<delete id="delete">
+		DELETE FROM hg_spu WHERE id IN 
+		<foreach collection="array" open="(" close=")" separator="," item="id">#{id}</foreach>
+	</delete>
+
+	<!-- 	List<Spu> list(SpuVo spuvo); -->
+	<select id="list" resultMap="SpuMap">
+		SELECT * FROM hg_spu 
+		<where>
+			<if test="brandId!=0">
+				AND brand_id=#{brandId}
+			</if>
+			<if test="categoryId!=0">
+				AND  category_id=#{categoryId}
+			</if>
+			<if test="key!=null and key != '' ">
+				AND (goods_name LIKE concat('%',#{key},'%') OR caption LIKE concat('%',#{key},'%'))
+			</if>
+		</where>
+		<if test="orderColumn!=null and orderColumn!= '' ">
+			ORDER BY ${orderColumn}
+			<if test="orderType=='ASC' or orderType=='DESC' ">
+				${orderType}
+			</if>
+		</if>
+	</select>
+	
+	
+	<!-- Spu findById(int id); -->
+	<select id="findById" resultMap="SpuMap">
+		SELECT * FROM hg_spu WHERE id=#{value}
+	</select>
+	
+</mapper>

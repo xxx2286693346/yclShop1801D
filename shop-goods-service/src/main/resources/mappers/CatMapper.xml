@@ -28,4 +28,9 @@
 		SELECT * FROM hg_category WHERE parent_id=#{value}
 	</select>
 	
+	
+	<!-- 根据id获取分类 -->
+	<select id="findById" resultType="category">
+		SELECT * FROM hg_category WHERE id=#{value}
+	</select>
 </mapper> 
