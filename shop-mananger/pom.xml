@@ -168,7 +168,7 @@
 				<configuration>
 					<httpConnector>
 						<!-- 端口号 -->
-						<port>9002</port>
+						<port>90</port>
 						<!-- <port>9094</port> -->
 						<!-- 项目访问路径 -->
 						<host>0.0.0.0</host>
