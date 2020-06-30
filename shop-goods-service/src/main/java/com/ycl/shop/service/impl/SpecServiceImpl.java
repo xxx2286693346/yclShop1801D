@@ -74,4 +74,10 @@ public class SpecServiceImpl implements SpecService{
 		return specMapper.getspecByid(id);
 	}
 
+	@Override
+	public List<Spec> listAll() {
+		// TODO Auto-generated method stub
+		return specMapper.listAll();
+	}
+
 }

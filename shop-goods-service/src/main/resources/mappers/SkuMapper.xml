@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ycl.shop.mapper.SkuMapper">
+
+	<resultMap type="sku" id="SkuMap">
+		<id column="id" property="id"></id>
+		<association property="spu" column="spu_id" select="com.ycl.shop.mapper.SpuMapper.findById"></association>
+	</resultMap>
+<!-- 继承即可 -->
+	<resultMap type="sku" id="SkuMapDetail" extends="SkuMap">
+		<collection property="options" column="id" select="com.ycl.shop.mapper.SpecMapper.listOptionByskuId"></collection>
+	</resultMap>	
+
+<!-- 	int insert(Sku sku); -->
+	<insert id="insert" useGeneratedKeys="true" keyColumn="id" keyProperty="id">
+		INSERT INTO hg_sku(title,sell_point,price,stock_count,barcode,image,
+		        status,create_time,update_time,cost_price,market_price,spu_id,cart_thumbnail)
+		    VALUES(#{title},#{sellPoint},#{price},#{stockCount},#{barcode},#{image},
+		        #{status},now(),now(),#{costPrice},#{marketPrice},#{spuId},#{cartThumbnail})
+	</insert>
+	
+	<!-- int insertSpecOption(@Param("skuId")  int id, @Param("opt") SpecOption specOption);-->	
+	<insert id="insertSpecOption">
+		INSERT INTO hg_sku_spec(sku_id,spec_id,spec_option_id) 
+			VALUES(#{skuId},#{opt.specId},#{opt.id})
+	</insert>
+	
+	<!-- int delete(int[] ids); -->
+	<delete id="delete">
+		DELETE FROM hg_sku 
+			WHERE id in <foreach collection="array" open="(" close=")" separator="," item="id">#{id}</foreach>
+	</delete>
+	<!-- int deleteSpecOption(int ...id); -->
+		<delete id="deleteSpecOption">
+		DELETE FROM hg_sku_spec 
+			WHERE sku_id in <foreach collection="array" open="(" close=")" separator="," item="id">#{id}</foreach>
+	</delete>
+	<!-- int update(Sku sku);	-->
+	<update id="update">
+		UPDATE hg_sku SET 
+		 title=#{title}
+		,sell_point=#{sellPoint}
+		,price=#{price}
+		,stock_count=#{stockCount}
+		,barcode=#{barcode}
+		<if test="image!=null and image!='' ">
+			,image=#{image}
+		</if>
+		,status=#{status}
+		,update_time=now()
+		,cost_price=#{costPrice}
+		,market_price=#{marketPrice}
+		,spu_id=#{spuId}
+		<if test="cartThumbnail!=null and cartThumbnail!='' ">
+		,cart_thumbnail=#{cartThumbnail}
+		</if>
+		WHERE id=#{id}
+	</update>
+	<!-- Sku findById(int id); -->
+	<!-- Sku findById(int id); -->
+	<select id="findById" resultMap="SkuMapDetail">
+		SELECT * FROM hg_sku WHERE id=#{value}
+	</select>
+	<!-- List<Sku> list(SkuVo skuvo); -->
+	<!-- List<Sku> list(SkuVo skuvo);  greater than  ; less than  -->
+	<select id="list" resultMap="SkuMap">
+		SELECT * FROM hg_sku
+		<where>
+			<if test="key!=null and key!=''">
+				AND (title LIKE CONCAT('%',#{key},'%') OR sell_point  LIKE CONCAT('%',#{key},'%') )
+			</if>
+			<if test="minPrice!=null and minPrice!=0 ">
+				AND price &gt;= #{minPrice}
+			</if>
+			<if test="maxPrice!=null and maxPrice!=0 ">
+				AND price &lt;= #{maxPrice}
+			</if>
+		</where>
+		ORDER BY id DESC
+	</select>
+</mapper>
+

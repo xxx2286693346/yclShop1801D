@@ -21,4 +21,6 @@ public interface SpecMapper {
 		int addOption(SpecOption specOption);
 		//删除规格明细
 		int delOption(int... ids);
+		//查询所有的
+		List<Spec> listAll();
 }

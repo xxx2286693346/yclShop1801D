@@ -48,14 +48,14 @@ public class SpuServiceImpl implements SpuService{
 
 	@Override
 	public PageInfo<Spu> list(SpuVo vo) {
-	//	PageHelper.startPage(, pageSize)
-		return null;
+		PageHelper.startPage(vo.getPageNum(), vo.getPageSize());
+		return new PageInfo<Spu>(spuMapper.list(vo));
 	}
 
 	@Override
 	public Spu getspuByid(int id) {
 		// TODO Auto-generated method stub
-		return spuMapper.getspuByid(id);
+		return spuMapper.findById(id);
 	}
 
 	

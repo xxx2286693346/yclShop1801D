@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.bawei.hgshop.dao.SpuDao">
+<mapper namespace="com.ycl.shop.mapper.SpuMapper">
 
 	<resultMap type="spu" id="SpuMap">
 		<id column="id" property="id"></id>
@@ -15,7 +15,7 @@
 	</insert>
 	<!-- int update(Spu spu); -->
 	<update id="update">
-		UPDATE hg_spu SET  goods_name=#{goodsName},is_marketable#{isMarketable},brand_id=#{brandId},
+		UPDATE hg_spu SET  goods_name=#{goodsName},is_marketable=#{isMarketable},brand_id=#{brandId},
 				caption=#{caption},category_id=#{categoryId},small_pic=#{smallPic} 
 		    WHERE id=#{id}
 	</update>

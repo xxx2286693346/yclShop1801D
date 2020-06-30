@@ -17,5 +17,5 @@ public interface SpuMapper {
 			//查询
 			List<Spu> list(SpuVo vo);
 			//回显功能
-			Spu getspuByid(int id);
+			Spu findById(int id);
 }

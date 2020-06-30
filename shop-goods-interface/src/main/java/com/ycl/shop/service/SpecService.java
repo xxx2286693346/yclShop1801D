@@ -17,4 +17,6 @@ public interface SpecService {
 	PageInfo<Spec> list(Spec spec,int pageNum,int pageSize);
 	//回显功能
 	Spec getspecByid(int id);
+	//查询所有的
+	List<Spec> listAll();
 }
