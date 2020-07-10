@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<link href="./resource/bootstrap-treeview/css/bootstrap-treeview.css" rel="stylesheet">
-<script src="./resource/bootstrap-treeview/js/bootstrap-treeview.js"></script>
+<link href="${pageContext.request.contextPath}/resource/bootstrap-treeview/css/bootstrap-treeview.css" rel="stylesheet">
+<script src="${pageContext.request.contextPath}/resource/bootstrap-treeview/js/bootstrap-treeview.js"></script>
     
 <div class="container">
 	<div class="row">

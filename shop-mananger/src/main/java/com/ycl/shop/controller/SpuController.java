@@ -5,6 +5,7 @@ import java.util.List;
 
 
 import org.apache.dubbo.config.annotation.Reference;
+import org.aspectj.weaver.ast.And;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -121,9 +122,10 @@ public class SpuController {
 	@RequestMapping("update")
 	public String update(Model model,Spu spu,
 			@RequestParam("myFile") MultipartFile file) {
-		
-		String uploadPath = fileUtils.upload(file);
-		spu.setSmallPic(uploadPath);
+		if(file!=null && !file.isEmpty()) {
+			String uploadPath = fileUtils.upload(file);
+			spu.setSmallPic(uploadPath);
+		}
 		
 		return spuService.update(spu)>0?"ok":"failed";
 		

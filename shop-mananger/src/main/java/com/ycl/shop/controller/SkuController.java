@@ -152,8 +152,10 @@ public class SkuController {
 			}
 		}
 		// 处理图片
+		 if(imageFile!=null && !imageFile.isEmpty()) {
 		 sku.setImage(fileUtils.upload(imageFile)); 
 		 sku.setCartThumbnail(fileUtils.upload(cartThumbnailFile)); 
+		 }
 		 
 		return skuService.update(sku)>0?"ok":"failed";
 	}

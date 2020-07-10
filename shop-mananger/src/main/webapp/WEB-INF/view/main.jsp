@@ -13,7 +13,7 @@
     <link rel="canonical" href="https://v4.bootcss.com/docs/examples/dashboard/">
 
     <!-- Bootstrap core CSS -->
-<link href="/resource/bootstrap4/css/bootstrap.css" rel="stylesheet" >
+<link href="${pageContext.request.contextPath}/resource/bootstrap4/css/bootstrap.css" rel="stylesheet" >
     <!-- Favicons -->
 <meta name="theme-color" content="#563d7c">
 
@@ -35,7 +35,7 @@
       }
     </style>
     <!-- Custom styles for this template -->
-    <link href="/resource/css/dashboard.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/resource/css/dashboard.css" rel="stylesheet">
   <style type="text/css">/* Chart.js */
 @-webkit-keyframes chartjs-render-animation{from{opacity:0.99}to{opacity:1}}@keyframes chartjs-render-animation{from{opacity:0.99}to{opacity:1}}.chartjs-render-monitor{-webkit-animation:chartjs-render-animation 0.001s;animation:chartjs-render-animation 0.001s;}</style></head>
   <body>
@@ -135,7 +135,7 @@
  <nav class="navbar navbar-dark fixed-bottom bg-dark flex-md-nowrap p-0 shadow">
  			<font color="red">  版权所有  违者必究</font>
  </nav>
-<script src="/resource/jquery/jquery-3.4.1.js" ></script>
+<script src="${pageContext.request.contextPath}/resource/jquery/jquery-3.4.1.js" ></script>
 <script type="text/javascript">
 	$(".nav-link").click(function(){
 		
